@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}    Deletar Tarefa {% endblock %}
+
+{% block 'head' %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block 'body' %}    
+
+    <div class="container mt-5">
+        <h2>Olá, {{ request.user.first_name}}. Tem certeza que deseja deletar esta tarefa?</h2> 
+        <hr>
+        <br>
+        <h4>Tarefa: {{lista.titulotarefa}}</h4>
+        <p>Nome Completo: {{ request.user.first_name}} {{ request.user.last_name}}</p>
+        <p>Email: {{ request.user.email}}</p>
+        <a class="text-blue-700" href="{% url 'delete' lista.id %}" class="ml-2"><button type="button" class="btn btn-danger">Deletar Tarefa</button></a>
+        <a class="text-blue-700" href="{% url 'home' %}" class="ml-2"><button type="button" class="btn btn-primary">Voltar</button></a>
+
+    </div>
+
+{% endblock %}

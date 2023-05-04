@@ -1,18 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block 'title' %}    Gerenciador de Tarefas {% endblock %}
+{% block 'title' %} Gerenciador de Tarefas {% endblock %}
 
-{% block 'head' %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
 
-{% block 'body' %}    
+{% block 'body' %}
 
-    <div class="container mt-5">
-        Dashboard Tarefas
+<div class="container mt-5">
+    <h2>Dashboard Tarefas Pendentes</h2>
+    <hr>
 
-        
+    <ol class="list-group">
+        <div class="container">
+            <a href="{% url 'criartarefa' %}"><button type="button" class="btn btn-success">Nova Tarefa</button></a>
+            <br> <br>
+            {% for lista in lista %}
+                <div class="row">
 
-        <a class="text-blue-700" href="{% url 'deslogar_usuario' %}" class="ml-2"><p class="text-2xl"> Logout </p> </a>
-    </div>
+                    <div class="col-sm-6">
+
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Tarefa: {{lista.titulotarefa}}</h5>
+                        </div>
+                        <p class="mb-1">Comentários: {{lista.comentario}}</p>
+                        <p class="mb-1">Grau de Urgencia: {{lista.urgencia}} </p>
+                        <p class="mb-1">Data da Criação: {{lista.dataatribuicao}} </p>
+                        <p class="mb-1">Data da Finalização: {{lista.datafinalizacao}} </p>
+
+                        <a href="#"><button type="button" class="btn btn-primary  me-md-1">Detalhes</button></a>
+                        <a href="{% url 'updatetarefa' lista.id %}"><button type="button"
+                                class="btn btn-success  me-md-1">Editar</button></a>
+                        <a href="{% url 'deletetarefa' lista.id %}"><button type="button"
+                                class="btn btn-danger  me-md-1">Deletar</button></a>
+
+
+
+                    </div>
+
+                </div>
+                <hr>
+            {% endfor %}
+
+            <br>
+
+        </div>
+
+    </ol>
+
+</div>
 
 {% endblock %}

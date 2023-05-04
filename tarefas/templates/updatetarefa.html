@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}    Perfil {% endblock %}
+
+{% block 'head' %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block 'body' %}    
+
+    <div class="container mt-5">
+        <h2>Editar Tarefa</h2> 
+        <hr>
+        <br>
+        <form action="{% url 'update' lista.id %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Título</label>
+                <input type="text" class="form-control" id="titulotarefa" name="titulotarefa" value="{{lista.titulotarefa}}">
+            </div>           
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Comentário: </label>
+                <textarea class="form-control" id="comentario" name="comentario" rows="3">{{lista.comentario}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Grau de Urgência </label>
+                <select class="form-select" aria-label="Default select example" name="urgencia">
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Alto">Alto</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Data para finalização </label>
+                <input type="date" class="form-control" id="datafinalizacao" name="datafinalizacao" value="{{lista.datafinalizacao}}"></input>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Concluido </label>
+                <input type="checkbox" name="concluido" value="True"></input>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-primary">Gravar</button>  
+            <a href="{% url 'home' %}"><input type="button" class="btn btn-danger" value="Voltar" ></a>     
+        </form>
+
+    </div>
+
+{% endblock %}
