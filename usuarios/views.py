@@ -17,14 +17,17 @@ def cadastro(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         password2 = request.POST.get('password2')
-
+        if request.POST.get("is_superuser"):
+            superuser = True
+        else:
+            superuser = False
         user = User.objects.filter(username=username).first()
         if user:
             return render(request, 'cadastro.html', {'error': 'ja existe um usuario com esse username'})
         elif password != password2:
             return render(request, 'cadastro.html', {'error': 'Senhas não coincidem'})
         else:
-            user = User.objects.create_user(first_name = first_name, last_name=last_name, username=username, email = email, password=password)
+            user = User.objects.create_user(first_name = first_name, last_name=last_name, username=username, email = email, password=password, is_superuser = superuser)
             user.save()
             return render(request, 'login.html')
 

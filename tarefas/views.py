@@ -18,13 +18,16 @@ def perfil(request):
 
 @login_required(login_url="/auth/login/")
 def criartarefa(request):
-    return render(request, 'criartarefa.html')
+    users = User.objects.all()
+    return render(request, 'criartarefa.html', {'users': users})
 
 @login_required(login_url="/auth/login/")
 def salvar(request):
     titulotarefa = request.POST.get('titulotarefa')
     comentario = request.POST.get('comentario')
     urgencia = request.POST.get('urgencia')
+    username = request.user.username
+    useratribuido = request.POST.get('user_atribuido')
     dataatribuicao = datetime.now()
     datafinalizacao = request.POST.get('datafinalizacao')
 
@@ -33,7 +36,10 @@ def salvar(request):
                         comentario = comentario, 
                         urgencia = urgencia,
                         dataatribuicao = dataatribuicao,
-                        datafinalizacao = datafinalizacao)
+                        datafinalizacao = datafinalizacao,
+                        useratribuido = useratribuido,
+                        username = username
+                        )
     
     return render(request, 'home.html', {"lista":lista_tarefas})
 

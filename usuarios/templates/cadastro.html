@@ -37,6 +37,11 @@
       <label class="form-label">Repita a senha</label>
       <input type="password" class="form-control" name="password2">
     </div>
+    <div class="mb-3">
+      <label class="form-label">É um usuario admin?</label>
+      <input type="checkbox" name="is_superuser" value="False">
+    </div>
+    
     <br>
     {% if error %}
         <p>{{ error }}</p>

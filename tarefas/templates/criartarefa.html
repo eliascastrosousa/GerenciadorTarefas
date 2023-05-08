@@ -28,6 +28,25 @@
                     <option value="Alto">Alto</option>
                 </select>
             </div>
+            {% if user.is_superuser %}
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Atribuir para</label>
+                    <select class="form-select" aria-label="Default select example" name="user_atribuido">
+                        <option value="{{ request.user.username }}">{{ request.user.username }}</option>
+                        
+                        {% for user in users %}
+                            <option value="{{ user.username }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% else %}
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Atribuir para</label>
+                    <select class="form-select" aria-label="Default select example" name="user_atribuido">
+                        <option value="{{ request.user.username }}">{{ request.user.username }}</option>
+                    </select>
+                </div>
+            {% endif %}
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Data para finalização </label>
                 <input type="date" class="form-control" id="datafinalizacao" name="datafinalizacao"></input>
@@ -36,7 +55,6 @@
             <button type="submit" class="btn btn-primary">Gravar</button>  
             <a href="{% url 'home' %}"><input type="button" class="btn btn-danger" value="Voltar" ></a>     
         </form>
-
     </div>
 
 {% endblock %}
