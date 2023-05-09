@@ -9,41 +9,41 @@
 {% block 'body' %}
 
 <div class="container mt-5">
-    <h2>Dashboard Tarefas Pendentes</h2>
+    <a href="{% url 'criartarefa' %}"><button type="button" class="btn btn-success">Nova Tarefa</button></a>
+    <br><br>
+    <h2>Minhas Tarefas </h2>
     <hr>
 
     <ol class="list-group">
+
         <div class="container">
-            <a href="{% url 'criartarefa' %}"><button type="button" class="btn btn-success">Nova Tarefa</button></a>
-            <br> <br>
+
 
             {% for lista in lista %}
-                <div class="row">
+            <div class="row">
 
-                    <div class="col-sm-6">
+                <div class="col-sm-6">
 
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Tarefa: {{lista.titulotarefa}}</h5>
-                        </div>
-                        <p class="mb-1">Criado por: {{lista.username}}</p>
-                        <p class="mb-1">Comentários: {{lista.comentario}}</p>
-                        <p class="mb-1">Grau de Urgencia: {{lista.urgencia}} </p>
-                        <p class="mb-1">Data da Criação: {{lista.dataatribuicao}} </p>
-                        <p class="mb-1">Data da Finalização: {{lista.datafinalizacao}} </p>
-                        <p class="mb-1">Atribuido a: {{lista.useratribuido}} </p>
-
-                        <a href="#"><button type="button" class="btn btn-primary  me-md-1">Detalhes</button></a>
-                        <a href="{% url 'updatetarefa' lista.id %}"><button type="button"
-                                class="btn btn-success  me-md-1">Editar</button></a>
-                        <a href="{% url 'deletetarefa' lista.id %}"><button type="button"
-                                class="btn btn-danger  me-md-1">Deletar</button></a>
-
-
-
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Tarefa: {{lista.titulotarefa}}</h5>
                     </div>
+                    <p class="mb-1">Criado por: {{lista.username}}</p>
+                    <p class="mb-1">Comentários: {{lista.comentario}}</p>
+                    <p class="mb-1">Urgencia: {{lista.urgencia}} </p>
+                    <p class="mb-1">Data para Finalização: {{lista.datafinalizacao}} </p>
+                    <br>
+                    <a href="#"><button type="button" class="btn btn-primary  me-md-1">Detalhes</button></a>
+                    <a href="{% url 'updatetarefa' lista.id %}"><button type="button"
+                            class="btn btn-success  me-md-1">Editar</button></a>
+                    <a href="{% url 'deletetarefa' lista.id %}"><button type="button"
+                            class="btn btn-danger  me-md-1">Deletar</button></a>
+
+
 
                 </div>
-                <hr>
+
+            </div>
+            <hr>
             {% endfor %}
 
             <br>

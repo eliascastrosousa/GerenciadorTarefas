@@ -12,8 +12,8 @@
         <hr>
         <br>
         <h4>Tarefa: {{lista.titulotarefa}}</h4>
-        <p>Nome Completo: {{ request.user.first_name}} {{ request.user.last_name}}</p>
-        <p>Email: {{ request.user.email}}</p>
+        <p>Comentarios: {{lista.comentario}}</p>
+        <p>Concluido: {{lista.concluido}}</p>
         <a class="text-blue-700" href="{% url 'delete' lista.id %}" class="ml-2"><button type="button" class="btn btn-danger">Deletar Tarefa</button></a>
         <a class="text-blue-700" href="{% url 'home' %}" class="ml-2"><button type="button" class="btn btn-primary">Voltar</button></a>
 

@@ -9,6 +9,7 @@ urlpatterns = [
     path('updatetarefa/<int:id>', views.updatetarefa, name="updatetarefa"),
     path('update/<int:id>', views.update, name="update"),
     path('deletetarefa/<int:id>', views.deletetarefa, name="deletetarefa"),
-    path('delete/<int:id>', views.delete, name="delete") 
+    path('delete/<int:id>', views.delete, name="delete"),
+    path('tarefasconcluidas', views.tarefasconcluidas, name='tarefasconcluidas')
 ]
 

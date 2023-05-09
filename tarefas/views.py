@@ -9,7 +9,7 @@ from .models import Lista
 
 @login_required(login_url="/auth/login/")
 def home(request):
-    lista_tarefas = Lista.objects.all()
+    lista_tarefas = Lista.objects.filter(useratribuido = request.user.username, concluido=False)
     return render(request, 'home.html', {"lista":lista_tarefas})
 
 @login_required(login_url="/auth/login/")
@@ -41,7 +41,7 @@ def salvar(request):
                         username = username
                         )
     
-    return render(request, 'home.html', {"lista":lista_tarefas})
+    return redirect(home)
 
 @login_required(login_url="/auth/login/")
 def updatetarefa(request, id):
@@ -50,8 +50,23 @@ def updatetarefa(request, id):
 
 @login_required(login_url="/auth/login/")
 def update(request, id):
-    lista_tarefas = Lista.objects.get(id=id)
-    return render(request, 'updatetarefa.html', {"lista":lista_tarefas})
+    lista = Lista.objects.get(id=id)
+    
+    if request.POST.get("titulotarefa"):
+        lista.titulotarefa = request.POST.get("titulotarefa")
+
+    if request.POST.get("comentario"):
+        lista.comentario = request.POST.get("comentario")
+
+    if request.POST.get("user_atribuido"):
+        lista.useratribuido = request.POST.get("user_atribuido")
+
+    if request.POST.get("concluido"):
+        lista.concluido = True
+        lista.datafinalizacao = datetime.now()
+    
+    lista.save()
+    return redirect(home) 
 
 @login_required(login_url="/auth/login/")
 def deletetarefa(request, id):
@@ -63,3 +78,10 @@ def delete(request, id):
     lista = Lista.objects.get(id=id)
     lista.delete()
     return redirect(home)
+
+@login_required(login_url="/auth/login/")
+def tarefasconcluidas(request):
+    lista_tarefas = Lista.objects.filter(useratribuido = request.user.username, concluido=True)
+    return render(request, 'tarefasconcluidas.html', {"lista":lista_tarefas})
+
+
